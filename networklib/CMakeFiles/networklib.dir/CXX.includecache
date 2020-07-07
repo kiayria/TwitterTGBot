@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kiayria/myProjects/Twitter-API-C-Library/networklib/src/read_keys.cpp
+networklib/oauth/read_keys.hpp
+-
+exception
+-
+fstream
+-
+string
+-
+
+networklib/include/networklib/oauth/read_keys.hpp
+string
+-
+
