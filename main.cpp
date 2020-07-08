@@ -31,7 +31,7 @@ int main() {
 
     //
     std::string last_seen_id = "1280410703959134209";
-    //auto res = get_statuses(app);
+    //auto res = get_timeline(app); //timeline without since_id parameter
     auto res = get_timeline(app, last_seen_id);
     pt::ptree root = res.ptree();
 
