@@ -36,6 +36,10 @@ set_property(TARGET boost PROPERTY
     INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
 set_property(TARGET boost PROPERTY
     INTERFACE_LINK_LIBRARIES ${Boost_LIBRARIES})
+find_package(Threads REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(Boost COMPONENTS system REQUIRED)
+find_package(CURL)
 
 
 # SUBDIRECTORIES
@@ -53,8 +57,9 @@ add_custom_target(compile_commands ALL
 
 
 
-add_executable(TwitterTGBot main.cpp)
+add_executable(TwitterTGBot main.cpp tg_bot.h tg_bot.cpp get_timeline.h get_timeline.cpp)
 target_link_libraries(TwitterTGBot twitterlib)
 target_link_libraries(TwitterTGBot ${LIBMONGOCXX_LIBRARIES})
 target_link_libraries(TwitterTGBot ${LIBBSONCXX_LIBRARIES})
 target_compile_features(TwitterTGBot PUBLIC cxx_std_17)
+target_link_libraries(TwitterTGBot /usr/local/lib/libTgBot.a ${CMAKE_THREAD_LIBS_INIT} ${OPENSSL_LIBRARIES} ${Boost_LIBRARIES} ${CURL_LIBRARIES})
