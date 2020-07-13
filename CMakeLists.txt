@@ -41,15 +41,15 @@ find_package(OpenSSL REQUIRED)
 find_package(Boost COMPONENTS system REQUIRED)
 find_package(CURL)
 
-#if (CURL_FOUND)
-#	include_directories(${CURL_INCLUDE_DIRS})
-#	add_definitions(-DHAVE_CURL)
-#endif()
+if (CURL_FOUND)
+	include_directories(${CURL_INCLUDE_DIRS})
+	add_definitions(-DHAVE_CURL)
+endif()
 
 # SUBDIRECTORIES
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-add_subdirectory(networklib)
-add_subdirectory(twitterlib)
+add_subdirectory(Twitter-API-C-Library/networklib)
+add_subdirectory(Twitter-API-C-Library/twitterlib)
 
 
 # CLANG TIDY

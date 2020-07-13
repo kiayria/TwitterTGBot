@@ -70,7 +70,7 @@ void tg_bot::start() {
         for (pt::ptree::const_iterator it = root.begin(); it != end; ++it) {
 
             if(it != root.begin() && !str.empty()){
-                str+= "\n̿' ̿'\\̵͇̿̿\\з=( ͡ °_̯͡° )=ε/̵͇̿̿/'̿'̿ ̿\n\n";
+                str+= "\n-------------------\n\n";
             }
 
 
