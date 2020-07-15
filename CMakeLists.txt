@@ -50,6 +50,8 @@ endif()
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 add_subdirectory(Twitter-API-C-Library/networklib)
 add_subdirectory(Twitter-API-C-Library/twitterlib)
+add_subdirectory(tgbot-cpp)
+
 
 
 # CLANG TIDY
@@ -66,4 +68,4 @@ target_link_libraries(TwitterTGBot twitterlib)
 target_link_libraries(TwitterTGBot ${LIBMONGOCXX_LIBRARIES})
 target_link_libraries(TwitterTGBot ${LIBBSONCXX_LIBRARIES})
 target_compile_features(TwitterTGBot PUBLIC cxx_std_17)
-target_link_libraries(TwitterTGBot /usr/local/lib/libTgBot.a ${CMAKE_THREAD_LIBS_INIT} ${OPENSSL_LIBRARIES} ${Boost_LIBRARIES} ${CURL_LIBRARIES})
+target_link_libraries(TwitterTGBot TgBot ${CMAKE_THREAD_LIBS_INIT} ${OPENSSL_LIBRARIES} ${Boost_LIBRARIES} ${CURL_LIBRARIES})

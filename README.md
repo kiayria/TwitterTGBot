@@ -8,7 +8,7 @@ Add your Twitter API consumer keys and secrets to the text file "keys".
 
 #### Using libraries:
  + [Twitter](https://github.com/a-n-t-h-o-n-y/Twitter-API-C-Library/tree/master) - using as a submodule
- + [Telegram](https://github.com/reo7sp/tgbot-cpp)
+ + [Telegram](https://github.com/reo7sp/tgbot-cpp) - using as s submodule
  + [Database](http://mongocxx.org/) 
 
 
