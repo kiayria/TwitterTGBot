@@ -16,14 +16,15 @@ include(GNUInstallDirs)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
-find_package(libmongocxx REQUIRED)
-find_package(libbsoncxx REQUIRED)
-include_directories(${LIBMONGOCXX_INCLUDE_DIR})
-include_directories(${LIBBSONCXX_INCLUDE_DIR})
-include_directories("/usr/local/include/mongocxx/v_noabi")
-include_directories("/usr/local/include/bsoncxx/v_noabi")
-include_directories("/usr/local/include/libmongoc-1.0")
-include_directories("/usr/local/include/libbson-1.0")
+# INCLUDE MONGO
+#find_package(libmongocxx REQUIRED)
+#find_package(libbsoncxx REQUIRED)
+#include_directories(${LIBMONGOCXX_INCLUDE_DIR})
+#include_directories(${LIBBSONCXX_INCLUDE_DIR})
+#include_directories("/usr/local/include/mongocxx/v_noabi")
+#include_directories("/usr/local/include/bsoncxx/v_noabi")
+#include_directories("/usr/local/include/libmongoc-1.0")
+#include_directories("/usr/local/include/libbson-1.0")
 include_directories("/usr/local/lib")
 
 
@@ -63,7 +64,7 @@ add_custom_target(compile_commands ALL
 
 
 
-add_executable(TwitterTGBot main.cpp tg_bot.h tg_bot.cpp get_timeline.h get_timeline.cpp)
+add_executable(TwitterTGBot main.cpp src/tg_bot.h src/tg_bot.cpp src/get_timeline.h src/get_timeline.cpp)
 target_link_libraries(TwitterTGBot twitterlib)
 target_link_libraries(TwitterTGBot ${LIBMONGOCXX_LIBRARIES})
 target_link_libraries(TwitterTGBot ${LIBBSONCXX_LIBRARIES})
