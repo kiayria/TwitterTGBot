@@ -4,6 +4,8 @@ project(TwitterTGBot)
 set(CMAKE_CXX_STANDARD 17)
 
 
+
+
 # BUILD OPTIONS
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 set(CMAKE_BUILD_TYPE Debug)
@@ -37,6 +39,7 @@ set_property(TARGET boost PROPERTY
     INTERFACE_LINK_LIBRARIES ${Boost_LIBRARIES})
 find_package(Threads REQUIRED)
 find_package(OpenSSL REQUIRED)
+find_package(Boost COMPONENTS system REQUIRED)
 find_package(CURL)
 
 if (CURL_FOUND)
@@ -61,7 +64,7 @@ add_custom_target(compile_commands ALL
 
 
 
-add_executable(TwitterTGBot main.cpp src/tg_bot.h src/tg_bot.cpp src/get_timeline.h src/get_timeline.cpp)
+add_executable(TwitterTGBot main.cpp src/tg_bot.h src/tg_bot.cpp src/get_timeline.h src/get_timeline.cpp src/login_with_twitter.h src/login_with_twitter.cpp)
 target_link_libraries(TwitterTGBot twitterlib)
 target_link_libraries(TwitterTGBot ${LIBMONGOCXX_LIBRARIES})
 target_link_libraries(TwitterTGBot ${LIBBSONCXX_LIBRARIES})
