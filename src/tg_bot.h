@@ -28,7 +28,6 @@ private:
             "help"
     };
 
-    std::string token = "";
 };
 
     std::string trim_string(std::string tweet);

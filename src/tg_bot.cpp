@@ -4,18 +4,47 @@
 
 namespace pt = boost::property_tree;
 
+#include <iostream>
+
+#include <bsoncxx/builder/stream/document.hpp>
+#include <bsoncxx/json.hpp>
+
+#include <mongocxx/client.hpp>
+#include <mongocxx/instance.hpp>
+
+
 const int MIN_MESSAGE_LENGTH = 5;
 const int MAX_TWEET_LENGTH = 140;
 const int MAX_MESSAGE_LENGTH = 4096;
 
 tg_bot::tg_bot() {
+    mongocxx::instance inst{};
+    mongocxx::client conn{mongocxx::uri{}};
 
+    bsoncxx::builder::stream::document document{};
+
+    auto collection = conn["testdb"]["testcollection"];
+    document << "hello" << "world";
+    document << "its" << "work";
+
+    collection.insert_one(document.view());
+    auto cursor = collection.find({});
+
+    for (auto&& doc : cursor) {
+        std::cout << bsoncxx::to_json(doc) << std::endl;
+    }
 }
 
 tg_bot::~tg_bot(){
 
 }
 void tg_bot::start() {
+
+    std::string token(getenv("TOKEN"));
+    printf("Token: %s\n", token.c_str());
+//    std::string webhookUrl(getenv("URL"));
+//    printf("Webhook url: %s\n", webhookUrl.c_str());
+
     TgBot::Bot bot(token);
     // start
     bot.getEvents().onCommand(command_list[0], [&bot](TgBot::Message::Ptr message) {
@@ -59,6 +88,7 @@ void tg_bot::start() {
         app.account = account;
         auto res = get_timeline(app);
         //auto res = get_timeline(app, last_seen_id);
+
 
 
         pt::ptree root = res.ptree();
@@ -143,6 +173,8 @@ void tg_bot::start() {
     // start bot
     try {
         printf("Bot username: %s\n", bot.getApi().getMe()->username.c_str());
+
+        bot.getApi().deleteWebhook();
         TgBot::TgLongPoll longPoll(bot);
         while (true) {
             printf("Long poll started\n");
@@ -161,12 +193,12 @@ void tg_bot::start() {
 //    try {
 //        printf("Bot username: %s\n", bot.getApi().getMe()->username.c_str());
 //
-//        TgWebhookTcpServer webhookServer(8080, bot);
+//        TgBot::TgWebhookTcpServer webhookServer(8080, bot);
 //
 //        printf("Server starting\n");
 //        bot.getApi().setWebhook(webhookUrl);
 //        webhookServer.start();
-//    } catch (exception& e) {
+//    } catch (std::exception& e) {
 //        printf("error: %s\n", e.what());
 //    }
 

@@ -4,8 +4,6 @@ project(TwitterTGBot)
 set(CMAKE_CXX_STANDARD 17)
 
 
-
-
 # BUILD OPTIONS
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 set(CMAKE_BUILD_TYPE Debug)
@@ -17,14 +15,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
 # INCLUDE MONGO
-#find_package(libmongocxx REQUIRED)
-#find_package(libbsoncxx REQUIRED)
-#include_directories(${LIBMONGOCXX_INCLUDE_DIR})
-#include_directories(${LIBBSONCXX_INCLUDE_DIR})
-#include_directories("/usr/local/include/mongocxx/v_noabi")
-#include_directories("/usr/local/include/bsoncxx/v_noabi")
-#include_directories("/usr/local/include/libmongoc-1.0")
-#include_directories("/usr/local/include/libbson-1.0")
+find_package(libmongocxx REQUIRED)
+find_package(libbsoncxx REQUIRED)
+include_directories(${LIBMONGOCXX_INCLUDE_DIR})
+include_directories(${LIBBSONCXX_INCLUDE_DIR})
+include_directories("/usr/local/include/mongocxx/v_noabi")
+include_directories("/usr/local/include/bsoncxx/v_noabi")
+include_directories("/usr/local/include/libmongoc-1.0")
+include_directories("/usr/local/include/libbson-1.0")
 include_directories("/usr/local/lib")
 
 
@@ -39,7 +37,6 @@ set_property(TARGET boost PROPERTY
     INTERFACE_LINK_LIBRARIES ${Boost_LIBRARIES})
 find_package(Threads REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_package(Boost COMPONENTS system REQUIRED)
 find_package(CURL)
 
 if (CURL_FOUND)
