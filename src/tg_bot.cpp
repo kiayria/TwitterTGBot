@@ -19,7 +19,7 @@ const int MAX_MESSAGE_LENGTH = 4096;
 
 tg_bot::tg_bot() {
     mongocxx::instance inst{};
-    mongocxx::client conn{mongocxx::uri{}};
+    mongocxx::client conn{mongocxx::uri{"mongodb://db:27017"}};
 
     bsoncxx::builder::stream::document document{};
 
