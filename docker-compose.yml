@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - db_net
+
+  flask:
+    image: ovcserega/aut_flask
+    #build: ./python/
+    #image:
+    ports:
+    - "5000:5000"
+    networks:
+      - db_net
+
+
+  tg_bot:
+    image: ovcserega/twittertgbot
+    #build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - db_net
+    environment:
+      TOKEN: 1181332527:AAFukyDAcmpzfaRSrasU1Yf_t7i6gOs59TU
+    depends_on:
+      - flask
+      - db
+
+networks:
+  db_net:

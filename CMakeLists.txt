@@ -16,6 +16,7 @@ include(GNUInstallDirs)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
+# INCLUDE MONGO
 find_package(libmongocxx REQUIRED)
 find_package(libbsoncxx REQUIRED)
 include_directories(${LIBMONGOCXX_INCLUDE_DIR})
@@ -36,12 +37,22 @@ set_property(TARGET boost PROPERTY
     INTERFACE_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
 set_property(TARGET boost PROPERTY
     INTERFACE_LINK_LIBRARIES ${Boost_LIBRARIES})
+find_package(Threads REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(Boost COMPONENTS system REQUIRED)
+find_package(CURL)
 
+if (CURL_FOUND)
+	include_directories(${CURL_INCLUDE_DIRS})
+	add_definitions(-DHAVE_CURL)
+endif()
 
 # SUBDIRECTORIES
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-add_subdirectory(networklib)
-add_subdirectory(twitterlib)
+add_subdirectory(Twitter-API-C-Library/networklib)
+add_subdirectory(Twitter-API-C-Library/twitterlib)
+add_subdirectory(tgbot-cpp)
+
 
 
 # CLANG TIDY
@@ -53,8 +64,9 @@ add_custom_target(compile_commands ALL
 
 
 
-add_executable(TwitterTGBot main.cpp)
+add_executable(TwitterTGBot main.cpp src/tg_bot.h src/tg_bot.cpp src/get_timeline.h src/get_timeline.cpp src/login_with_twitter.h src/login_with_twitter.cpp)
 target_link_libraries(TwitterTGBot twitterlib)
 target_link_libraries(TwitterTGBot ${LIBMONGOCXX_LIBRARIES})
 target_link_libraries(TwitterTGBot ${LIBBSONCXX_LIBRARIES})
 target_compile_features(TwitterTGBot PUBLIC cxx_std_17)
+target_link_libraries(TwitterTGBot TgBot ${CMAKE_THREAD_LIBS_INIT} ${OPENSSL_LIBRARIES} ${Boost_LIBRARIES} ${CURL_LIBRARIES})

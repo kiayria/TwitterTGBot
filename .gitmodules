@@ -1,0 +1,6 @@
+[submodule "tgbot-cpp"]
+	path = tgbot-cpp
+	url = https://github.com/reo7sp/tgbot-cpp.git
+[submodule "Twitter-API-C-Library"]
+	path = Twitter-API-C-Library
+	url = https://github.com/kiayria/Twitter-API-C-Library.git

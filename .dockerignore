@@ -1,0 +1,11 @@
+# cataloges
+.git
+.cache
+cmake-build-debug
+build
+
+# files
+*.md
+.git*
+Dockerfile
+.dockerignore
